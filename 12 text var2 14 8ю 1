@@ -1,0 +1,4 @@
+sections = new ArrayList<SnakeSection>();
+        SnakeSection section1 = new SnakeSection(x, y);
+        sections.add(section1);
+        isAlive = true;

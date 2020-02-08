@@ -1,0 +1,3 @@
+processing file: name = test2.txt, size = 0 bytesprocessing file: name = test1.txt, size = 189 bytesprocessing file: name = test3.txt, size = 92 bytesprocessing file: name = test2.txt, size = 0 bytes
+processing file: name = test1.txt, size = 189 bytes
+processing file: name = test3.txt, size = 92 bytes

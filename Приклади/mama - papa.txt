@@ -1,0 +1,61 @@
+package com.javarush.task.task06.task0621;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+/* 
+Родственные связи кошек
+*/
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String dedName = reader.readLine();
+        Cat catDed = new Cat(dedName);
+
+       String babaName = reader.readLine();
+        Cat catBaba = new Cat(babaName);
+
+        String papaName = reader.readLine();
+        Cat catPapa = new Cat(papaName, null, catDed);
+
+      //  String daughterName = reader.readLine();
+    //    Cat catDaughter = new Cat(daughterName, catMother);
+
+        System.out.println(catDed);
+        System.out.println(catBaba);
+        System.out.println(catPapa);
+    }
+
+    public static class Cat {
+        private String name;
+        private Cat parent;
+        private Cat parent2;
+        private Cat ded;
+
+        Cat(String name) {
+            this.name = name;
+        }
+// - constryctor dlya papa ----------
+      /*  Cat (String name, Cat ded){
+            this.name = name;
+            this.ded = ded;
+        }*/
+
+        Cat(String name, Cat parent, Cat parent2) {
+            this.name = name;
+            this.parent = parent; // parent = mother
+            this.parent2 = parent2; // parent2 = father
+        }
+
+        @Override
+        public String toString() {
+            if (parent2 == null)
+                return "The cat's name is " + name + ", no mother, no father";
+            else
+                return "The cat's name is " + name + ", no mother " + ", father is " + ded;
+        }
+    }
+
+}

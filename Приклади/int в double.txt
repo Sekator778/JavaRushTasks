@@ -1,0 +1,7 @@
+    public static double division(int a, int b) {
+        double div = (double) a / b;
+        return div;
+
+
+double a1 = a;
+double b1 = b;

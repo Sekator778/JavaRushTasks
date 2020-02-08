@@ -1,0 +1,2 @@
+/home/sekator/Java/JavaRushTasks/test1.txt
+/home/sekator/Java/JavaRushTasks/test2.txt
