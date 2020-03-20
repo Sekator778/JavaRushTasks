@@ -32,7 +32,8 @@ public class Solution {
         while (bufferedReader.ready()){
             String s = bufferedReader.readLine();
             Matcher m = pattern.matcher(s);
-            while (m.find()){count+= m.groupCount();}           // тут все вхождения по патерну
+            while (m.find()) {
+                count+= m.groupCount();}           // тут все вхождения по патерну
         }
 //        fileReader.close();
         bufferedReader.close();
