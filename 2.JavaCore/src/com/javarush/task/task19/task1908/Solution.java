@@ -5,8 +5,6 @@ package com.javarush.task.task19.task1908;
 */
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Solution {
@@ -21,11 +19,7 @@ public class Solution {
 
         Pattern p = Pattern.compile("\\b[0-9]+\\b");
         while (filereader.ready()) {
-            String s = filereader.readLine();
-            Matcher m = p.matcher(s);
-            while (m.find()) {
-                filewriter.write(m.group() + " ");
-            }
+            
         }
         filereader.close();
         filewriter.close();
