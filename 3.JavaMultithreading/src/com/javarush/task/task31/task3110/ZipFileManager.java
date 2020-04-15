@@ -138,7 +138,6 @@ public class ZipFileManager {
         if (!Files.isRegularFile(zipFile)) {
             throw new WrongZipFileException();
         }
-
         // Создаем временный файл
         Path tempZipFile = Files.createTempFile(null, null);
         List<Path> archiveFiles = new ArrayList<>();

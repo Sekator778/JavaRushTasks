@@ -49,14 +49,4 @@ public class CustomTree extends AbstractList<String> implements Serializable, Cl
     public int size() {
         return 0;
     }
-
-    class Entry<T> implements Serializable {
-        String elementName;
-        boolean availableToAddLeftChildren;
-        boolean availableToAddRightChildren;
-
-        Entry<T> parent;
-        Entry<T> leftChild;
-        Entry<T> rightChild;
-    }
 }
