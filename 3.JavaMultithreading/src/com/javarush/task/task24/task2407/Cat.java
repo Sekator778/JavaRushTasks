@@ -5,10 +5,16 @@ package com.javarush.task.task24.task2407;
 который не реализован в текущем классе
  */
 public class Cat implements Pet {
-    private String name;
+    public String name;
+    public int age;
+    public int weight;
 
     public Cat(String name) {
         this.name = name;
+    }
+
+    public Cat() {
+
     }
 
     /**
