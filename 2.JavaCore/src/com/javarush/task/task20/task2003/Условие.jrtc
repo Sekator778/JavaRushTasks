@@ -1,0 +1,13 @@
+taskKey="com.javarush.task.task20.task2003"\n\nЗнакомство с properties
+
+Метод main() считывает имя файла с консоли и заполняет runtimeStorage данными из файла.
+В методах save() и load() реализуй логику записи в файл и чтения из файла для карты runtimeStorage.
+Файл должен быть в формате .properties. Комментарии в файле можно игнорировать.
+Про .properties почитать тут - http://ru.wikipedia.org/wiki/.properties
+
+
+Требования:
+1.	Метод save() должен сохранять карту runtimeStorage в параметр outputStream.
+2.	Метод load() должен восстанавливать состояние карты runtimeStorage из параметра inputStream.
+
+
