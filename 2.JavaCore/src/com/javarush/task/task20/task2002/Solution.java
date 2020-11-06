@@ -1,6 +1,6 @@
 package com.javarush.task.task20.task2002;
 
-import javax.jws.soap.SOAPBinding;
+//import javax.jws.soap.SOAPBinding;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
