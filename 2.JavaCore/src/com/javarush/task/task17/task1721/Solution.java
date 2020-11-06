@@ -22,13 +22,13 @@ public class Solution {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             allLines = Files.readAllLines(Paths.get(reader.readLine()), Charset.defaultCharset());
             forRemoveLines = Files.readAllLines(Paths.get(reader.readLine()), Charset.defaultCharset());
-            joinData();
+            new Solution().joinData();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void joinData() throws CorruptedDataException {
+    public void joinData() throws CorruptedDataException {
         if (allLines.containsAll(forRemoveLines)) {
             allLines.removeAll(forRemoveLines);
         } else {
