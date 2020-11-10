@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class Test5 {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("test1.txt"));

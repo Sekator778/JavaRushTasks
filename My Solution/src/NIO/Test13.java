@@ -1,6 +1,8 @@
 package NIO;
 
 import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 class MyFileFindVisitor extends SimpleFileVisitor<Path> {
     static  int count = 0;
