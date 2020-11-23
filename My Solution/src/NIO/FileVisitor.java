@@ -1,6 +1,7 @@
 package NIO;
 
 import java.io.IOException;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 
 

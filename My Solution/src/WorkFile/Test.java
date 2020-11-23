@@ -1,5 +1,7 @@
 package WorkFile;
 
+import java.nio.file.*;
+
 public class Test {
     public static void main(String[] args) throws Exception {
         try(DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get("/home/sekator/test folder")))

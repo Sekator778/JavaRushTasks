@@ -11,7 +11,7 @@ import java.util.List;
 */
 public class Solution {
     public static List<String> getFileTree(String root) throws IOException {
-      List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         Files.walk(Paths.get(root))
                 .filter(Files::isRegularFile)
                 .forEach(i -> list.add(i.toString()));
