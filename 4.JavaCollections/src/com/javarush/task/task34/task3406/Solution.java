@@ -32,7 +32,6 @@ public class Solution {
         Monkey monkey = new Monkey("Simka");
         // крейт вейкреференс link
         WeakReference<Monkey> weakReference = new WeakReference<>(monkey);
-
         //Add reference here
         // start gc and wait 1s
         helper.callGC();
@@ -41,7 +40,6 @@ public class Solution {
         helper.callGC();
         //
         helper.consumeHeap();
-
         if (weakReference.get() == null)
             System.out.println("Finalized");
 
