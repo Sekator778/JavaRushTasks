@@ -15,7 +15,7 @@ public class Solution {
     public static class Monkey {
     }
 
-    public static void main(String args[]) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         helper.startTime();
         List<PhantomReference<Monkey>> list = helper.getPopulatedList();
 
@@ -32,7 +32,7 @@ public class Solution {
     }
 
     public static class Helper {
-        private ReferenceQueue<Monkey> queue = new ReferenceQueue<>();
+        private final ReferenceQueue<Monkey> queue = new ReferenceQueue<>();
 
         private long startTime;
 
@@ -71,15 +71,19 @@ public class Solution {
                     count++;
                 }
             }
-
-            System.out.println(String.format("The count of enqueued references is %d (%s GC was called)", count, string));
+            System.out.printf("The count of enqueued references is %d (%s GC was called)%n", count, string);
         }
 
         public List<PhantomReference<Monkey>> getPopulatedList() {
-            return null;
+            ReferenceQueue<Monkey> queue = new ReferenceQueue<>();
+            List<PhantomReference<Monkey>> resultList = new ArrayList<>();
+            for (int i = 0; i < 200; i++) {
+                resultList.add(new PhantomReference<>(new Monkey(), queue));
+            }
+            return resultList;
         }
 
-        public void finish() throws InterruptedException {
+        public void finish() {
             int count = 0;
             while (queue.poll() != null) {
                 count++;
