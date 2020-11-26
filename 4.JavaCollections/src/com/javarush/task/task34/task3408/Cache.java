@@ -7,14 +7,42 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 public class Cache<K, V> {
-    private final Map<K, V> cache = new WeakHashMap<>();   //TODO add your code here
+    private final Map<K, V> cache = new WeakHashMap<>();
 
     public V getByKey(K key, Class<V> clazz) throws Exception {
-       return cache.getOrDefault(key, (V) clazz); //TODO add your code here
+        if (!cache.containsKey(key)) {
+            Constructor<V> constructor = clazz.getConstructor(key.getClass());
+            V value = constructor.newInstance(key);
+            cache.put(key, value);
+        }
+        return cache.get(key);
+    }
+
+    public boolean put2(V obj) {
+        try {
+            Method getKey = obj.getClass().getDeclaredMethod("getKey");
+            getKey.setAccessible(true);
+            K key = (K) getKey.invoke(obj);
+            cache.put(key, obj);
+            return true;
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean put(V obj) {
         //TODO add your code here
+        try {
+            Method getKey = obj.getClass().getDeclaredMethod("getKey");
+            getKey.setAccessible(true);
+            K key = (K) getKey.invoke(obj);
+            cache.put(key, obj);
+            return true;
+        } catch (NoSuchMethodException e) {
+        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException e) {
+        }
         return false;
     }
 

@@ -29,6 +29,16 @@ public class Solution {
         SomeValue{myKey=SomeKey{name='testNew'}}
         2
          */
+        value = null;
+        someKeyNew = null;
+        for (int i = 0; i < 10; i++) {
+
+            System.gc();
+        }
+        Thread.sleep(1000);
+        System.out.println("After " + cache.size());
+
+
     }
 
     public static class SomeKey {
