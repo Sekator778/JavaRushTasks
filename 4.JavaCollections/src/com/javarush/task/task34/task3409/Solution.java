@@ -23,5 +23,8 @@ public class Solution {
             Properties properties = new Properties();
             properties.load(is);
         }
+        LOGGER.info("Test log record!!!");
+        LOGGER.error("В программе возникла ошибка!");
+        LOGGER.warn("Внимание! Программа пытается разделить одно число на другое");
     }
 }
