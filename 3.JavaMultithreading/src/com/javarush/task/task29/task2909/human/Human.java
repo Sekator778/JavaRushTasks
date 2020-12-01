@@ -1,5 +1,9 @@
 package com.javarush.task.task29.task2909.human;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Human {
     public static int nextId = 0;
     private int id;
