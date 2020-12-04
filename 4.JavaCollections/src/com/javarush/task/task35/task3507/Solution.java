@@ -7,6 +7,27 @@ import java.util.Set;
 
 /* 
 ClassLoader - что это такое?
+
+0. обязательно почитать док https://docs.oracle.com/javase/7/docs/api/java/lang/ClassLoader.html
+(это помимо ссылок, приведенных в остальных комментариях)
+
+1. свой ClassLoader - использовать обязательно.
+ 1.1.  В данном случае достаточно написать свой метод Class load (path)
+   1.1.1  - считываете Path в byte[] b  // Files.readAllBytes
+   1.1.2 - return defineClass в аргументах которого  (дабы не заморачиваться) первый параметр можно писать null /*из полученного Class вы и без имени сможете вытащить конструкторы и интерфейсы.
+
+2. из аргумента String pathToAnimals получаем  список файлов //new File(pathToAnimals).listFiles()
+  2.1 на всякий случай для каждого полученного File проверяем файл ли это и заканчивается ли его имя на ".class".
+ 2.2  для кaждого File своим ClassLoader  получаем объект Class
+
+3. Обрабатываем полученный объект. В частности - интерфейсы и конструкторы.
+  3.1 clazz.getInterfaces()
+  3.2 clazz.getConstructors()
+
+3. если ок, то clazz.newInstance() -  и д
+
+
+
 */
 
 public class Solution {
