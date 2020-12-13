@@ -1,24 +1,25 @@
 package read_file;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TreeSet;
-
-import static java.time.LocalTime.now;
 
 /**
  * Читаем файл разбиваем на отдельные слова выводим на экран
  */
 public class SplitFile {
+    private static final String DATE_FORMAT_NOW = "dd-MM-yyyy-HH-mm";
+
     public static void main(String[] args) throws IOException {
-        new SplitFile().printToConsoleFiveFirstChar(readFileToTreeSet("text1.txt"));
+        SplitFile worker = new SplitFile();
+        worker.printToConsoleFiveFirstChar(readFileToTreeSet("text1.txt"));
+        worker.saveWorkToFile(readFileToTreeSet("text1.txt"));
     }
 
     /**
      * Читаем и сортируем только уников в сете
+     *
      * @param fileName - имя файла
      * @return - сет слов
      */
@@ -51,10 +52,30 @@ public class SplitFile {
         }
     }
 
+    /**
+     * запись результата в файл
+     */
     private void saveWorkToFile(TreeSet<String> strings) {
         String filenameBase = "myDictionary";
-        String currentTimestamp = new SimpleDateFormat("yyyymmddHHMMss").format(now());
-        File f = new File(filenameBase + currentTimestamp +  ".png");
+        String currentTimestamp = now();
+        File fileName = new File(filenameBase + currentTimestamp + ".txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (String s : strings
+            ) {
+                writer.write(s + "\t" + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * добавление к имени файла времени метку
+     *
+     * @return - текущая дата
+     */
+    private String now() {
+        return new SimpleDateFormat(DATE_FORMAT_NOW).format(new Date());
     }
 }
 

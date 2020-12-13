@@ -1,20 +1,31 @@
 package tree;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Stack;
+
+/**
+ * тренировочный класс дерева
+ * обход в глубину с рекурсией и без
+ * обход в ширину за счет особенностей применяемых коллекций
+ */
 public class Tree {
     public static void main(String[] args) {
-        Tree root =
-                new Tree(20,
-                        new Tree(7,
-                                new Tree(4, null, new Tree(6)), new Tree(9)),
-                        new Tree(35,
-                                new Tree(31, new Tree(28), null),
-                                new Tree(40, new Tree(38), new Tree(52))));
+        Node root =
+                new Node(20,
+                        new Node(7,
+                                new Node(4, null, new Node(6)), new Node(9)),
+                        new Node(35,
+                                new Node(31, new Node(28), null),
+                                new Node(40, new Node(38), new Node(52))));
 
-        System.out.println("Сумма дерева: " + root.sum());
+        System.out.println("Сумма дерева recursive: " + root.sumRecursive());
+        System.out.println("Сумма дерева deep: " + root.sumDeep(root));
+        System.out.println("Сумма дерева width: " + root.sumWidth(root));
 
     }
 
-    private class Node {
+    static class Node {
         int value;
         Node left;
         Node right;
@@ -29,20 +40,59 @@ public class Tree {
             this.value = value;
         }
 
-        public Node(int value, Node left) {
-            this.value = value;
-            this.left = left;
-        }
-
-        public int sum(Node node) {
-            int sum = 0;
+        public int sumRecursive() {
+            int sum = value;
+            System.out.println(value);
             if (left != null) {
-                sum += sum(left);
+                sum += left.sumRecursive();
             }
             if (right != null) {
-                sum += sum(right);
+                sum += right.sumRecursive();
             }
             return sum;
         }
+
+        public int sumDeep(Node root) {
+            Stack<Node> stack = new Stack<>();
+            stack.push(root);
+            int sum = 0;
+            while (!stack.empty()) {
+                Node node = stack.pop();
+                sum += node.value;
+                System.out.println(node.value);
+                if (node.left != null) {
+                    stack.push(node.left);
+                }
+                if (node.right != null) {
+                    stack.push(node.right);
+                }
+            }
+            return sum;
+        }
+
+        /**
+         * поиск в ширину позволяет найти ближайших к корню элемент
+         * @param root
+         * @return
+         */
+        public int sumWidth(Node root) {
+            Queue<Node> queue = new ArrayDeque<>();
+            queue.add(root);
+            int sum = 0;
+            while (!queue.isEmpty()) {
+                Node node = queue.remove();
+                sum += node.value;
+                System.out.println(node.value);
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            return sum;
+        }
+
     }
+
 }
