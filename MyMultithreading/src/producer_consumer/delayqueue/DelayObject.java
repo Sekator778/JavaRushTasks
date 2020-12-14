@@ -28,6 +28,6 @@ public class DelayObject implements Delayed {
 
     @Override
     public String toString() {
-        return "Data: " + this.data + " startTime: " + this.startTime + " mS";
+        return "Data: " + this.data + " startTime: " + this.startTime;
     }
 }
