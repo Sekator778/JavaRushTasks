@@ -1,5 +1,3 @@
-package read_file;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,11 +8,12 @@ import java.util.TreeSet;
  */
 public class SplitFile {
     private static final String DATE_FORMAT_NOW = "dd-MM-yyyy-HH-mm";
+    private static final String NAME_FILE = "java_noes.txt";
 
     public static void main(String[] args) throws IOException {
         SplitFile worker = new SplitFile();
-        worker.printToConsoleFiveFirstChar(readFileToTreeSet("text1.txt"));
-        worker.saveWorkToFile(readFileToTreeSet("text1.txt"));
+        worker.printToConsoleFiveFirstChar(readFileToTreeSet(NAME_FILE));
+//        worker.saveWorkToFile(readFileToTreeSet("NAME_FILE"));
     }
 
     /**
@@ -29,10 +28,10 @@ public class SplitFile {
             String line;
             while ((line = reader.readLine()) != null) {
                 for (String word : line.split("\\W+")) {
-                    if (word.length() < 3) {
+                    if (word.length() < 3 || word.matches(".*\\d.*") || word.matches(".*[0-9].*")  ) {
                         continue;
                     }
-                    result.add(word);
+                    result.add(word.toLowerCase());
                 }
             }
         } catch (IOException e) {
@@ -78,4 +77,3 @@ public class SplitFile {
         return new SimpleDateFormat(DATE_FORMAT_NOW).format(new Date());
     }
 }
-
