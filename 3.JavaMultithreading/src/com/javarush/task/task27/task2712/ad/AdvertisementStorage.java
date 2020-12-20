@@ -1,31 +1,25 @@
 package com.javarush.task.task27.task2712.ad;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AdvertisementStorage {
-    private static final AdvertisementStorage instance = new AdvertisementStorage();
-
-    private final List<Advertisement> videos = new ArrayList();
-
-    private AdvertisementStorage() {
-        Object someContent = new Object();
-        add(new Advertisement(someContent, "First Video", 5000, 100, 3 * 60)); // 3 min
-        add(new Advertisement(someContent, "Second Video", 100, 10, 15 * 60)); //15 min
-        add(new Advertisement(someContent, "Third Video", 10000, 10, 10 * 60)); //10 min
-        add(new Advertisement(someContent, "Fourth Video", 1500, 5, 30 * 60));
-        add(new Advertisement(someContent, "Fifth Video", 4000, 10, 2 * 60));
-        add(new Advertisement(someContent, "Seventh Video", 2500, 10, 20 * 60));
-        add(new Advertisement(someContent, "Eight Video", 3000, 5, 36 * 60));
-        add(new Advertisement(someContent, "Ninth Video", 500, 5, 3 * 60));
-        add(new Advertisement(someContent, "Ten Video", 4500, 10, 18 * 60));
+    private static class InstanceHolder {
+        private static final AdvertisementStorage ourInstance = new AdvertisementStorage();
     }
 
     public static AdvertisementStorage getInstance() {
-        if (instance == null) {
-            return new AdvertisementStorage();
-        }
-        return instance;
+        return InstanceHolder.ourInstance;
+    }
+
+    private final List<Advertisement> videos = new LinkedList<>();
+
+    private AdvertisementStorage() {
+        //init random videos
+        Object someContent = new Object();
+        videos.add(new Advertisement(someContent, "First Video", 5000, 100, 3 * 60));   //weight=277
+        videos.add(new Advertisement(someContent, "Second Video", 100, 10, 15 * 60));   //weight=11
+        videos.add(new Advertisement(someContent, "Third Video", 400, 2, 10 * 60));     //weight=333
     }
 
     public List<Advertisement> list() {
@@ -33,6 +27,6 @@ public class AdvertisementStorage {
     }
 
     public void add(Advertisement advertisement) {
-        list().add(advertisement);
+        videos.add(advertisement);
     }
 }

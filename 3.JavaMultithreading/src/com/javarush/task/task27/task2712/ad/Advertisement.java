@@ -1,11 +1,20 @@
 package com.javarush.task.task27.task2712.ad;
 
 public class Advertisement {
+    //видео
     private Object content;
+
     private String name;
+
+    //начальная сумма, стоимость рекламы в копейках. Используем long, чтобы избежать проблем с округлением
     private long initialAmount;
+
+    //количество оплаченных показов
     private int hits;
+
+    //продолжительность в секундах
     private int duration;
+
     private long amountPerOneDisplaying;
 
     public Advertisement(Object content, String name, long initialAmount, int hits, int duration) {
@@ -14,7 +23,10 @@ public class Advertisement {
         this.initialAmount = initialAmount;
         this.hits = hits;
         this.duration = duration;
-        amountPerOneDisplaying = hits > 0 ? initialAmount / hits : 0;
+
+        if (hits > 0) {
+            amountPerOneDisplaying = initialAmount / hits;
+        }
     }
 
     public String getName() {
@@ -30,10 +42,17 @@ public class Advertisement {
     }
 
     public void revalidate() {
-        if (this.hits == 0){
+        if (hits == 0) {
             throw new UnsupportedOperationException();
-        }else {
-            hits -= 1;
         }
+        hits--;
+    }
+
+    public boolean isActive() {
+        return hits > 0;
+    }
+
+    public int getHits() {
+        return hits;
     }
 }

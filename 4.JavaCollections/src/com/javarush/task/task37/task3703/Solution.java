@@ -12,6 +12,6 @@ public class Solution {
     }
 
     public static Class getExpectedClass() {
-        return null;
+        return ConcurrentSkipListMap.class;
     }
 }

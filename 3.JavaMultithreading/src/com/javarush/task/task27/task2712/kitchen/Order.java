@@ -1,43 +1,57 @@
 package com.javarush.task.task27.task2712.kitchen;
 
+import com.javarush.task.task27.task2712.ConsoleHelper;
 import com.javarush.task.task27.task2712.Tablet;
 
 import java.io.IOException;
 import java.util.List;
 
-import static com.javarush.task.task27.task2712.ConsoleHelper.getAllDishesForOrder;
-
-
 public class Order {
     private final Tablet tablet;
-    protected List<Dish> dishes = getAllDishesForOrder();
-    private int duration;
 
-    public int getTotalCookingTime() {
-        for (Dish dish : dishes){
-            duration = duration + dish.getDuration();
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public Tablet getTablet() {
+        return tablet;
+    }
+
+    protected List<Dish> dishes;
+
+    protected void initDishes() throws IOException {
+        this.dishes = ConsoleHelper.getAllDishesForOrder();
+    }
+
+    public Order(Tablet tablet) throws IOException {
+        this.tablet = tablet;
+        initDishes();
+        ConsoleHelper.writeMessage(toString());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        if (dishes.size() == 0) return result.toString();
+        result.append("Your order: [" + dishes.get(0));
+
+        for (int i = 1; i < dishes.size(); i++) {
+            result.append(", " + dishes.get(i).name());
         }
-        return duration;
+        result.append("] of " + tablet);
+        result.append(", cooking time " + getTotalCookingTime() + "min");
+        return result.toString();
     }
 
     public boolean isEmpty() {
         return dishes.isEmpty();
     }
 
-
-    public Order(Tablet tablet) throws IOException {
-        this.tablet = tablet;
-    }
-
-    @Override
-    public String toString() {
-        if (dishes.isEmpty()) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
+    public int getTotalCookingTime() {
+        int cookingTime = 0;
         for (Dish dish : dishes) {
-            sb.append(dish).append(", ");
+            cookingTime += dish.getDuration();
         }
-        return String.format("Your order: [%s] of %s", sb.toString().substring(0, sb.length() - 2), tablet.toString());
+        return cookingTime;
     }
 }

@@ -7,11 +7,7 @@ import java.util.Observer;
 
 public class Waiter implements Observer {
     @Override
-    public void update(Observable observable, Object order) {
-        ConsoleHelper.writeMessage(order + " was cooked by " + observable);
-
+    public void update(Observable cook, Object order) {
+        ConsoleHelper.writeMessage(order + " was cooked by " + cook);
     }
 }
-//3. Метод void update будет выводить в консоль сообщение о том, какой заказ и кем был приготовлен:
-//
-//order + " was cooked by " + cook

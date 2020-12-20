@@ -8,37 +8,35 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.javarush.task.task27.task2712.kitchen.Dish.allDishesToString;
-
-//- writeMessage(String message) - для вывода message в консоль
-//- String readString() - для чтения строки с консоли
-//- List<Dish> getAllDishesForOrder() - просит пользователя выбрать блюдо и добавляет его в список.
 public class ConsoleHelper {
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
 
     public static void writeMessage(String message) {
         System.out.println(message);
     }
 
     public static String readString() throws IOException {
-        String inputString = reader.readLine();
-        reader.close();
-        return inputString;
+        return bis.readLine();
     }
 
     public static List<Dish> getAllDishesForOrder() throws IOException {
-        writeMessage("Выберите блюда пожалуйста");
-        writeMessage(allDishesToString());
         List<Dish> dishes = new ArrayList<>();
-        String dish = "";
-        while (!(dish = reader.readLine()).equals("exit")){
-            try{
-                dishes.add(Dish.valueOf(dish));
-            }catch (IllegalArgumentException e){
-                writeMessage("Такого блюда нет в меню");
+        ConsoleHelper.writeMessage("Please choose a dish from the list:" + Dish.allDishesToString() + "\n or type 'exit' to complete the order");
+        while (true) {
+            String dishName = ConsoleHelper.readString().trim();
+            if ("exit".equals(dishName)) {
+                break;
             }
 
-        }return dishes;
-    }
+            try {
+                Dish dish = Dish.valueOf(dishName);
+                dishes.add(dish);
+                writeMessage(dishName + " has been successfully added to your order");
+            } catch (Exception e) {
+                writeMessage(dishName + " hasn't been detected");
+            }
+        }
 
+        return dishes;
+    }
 }

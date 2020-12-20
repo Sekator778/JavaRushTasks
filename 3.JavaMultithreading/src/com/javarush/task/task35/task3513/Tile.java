@@ -3,32 +3,24 @@ package com.javarush.task.task35.task3513;
 import java.awt.*;
 
 public class Tile {
-    int value;
+    int value = 0;
 
-    public Tile(int value) {
-        this.value = value;
+    Tile() {
     }
 
-    //Метод isEmpty, возвращающий true в случае, если значение поля value равно 0, иначе - false.
-//5. Метод getFontColor, возвращающий новый цвет(объект типа Color) (0x776e65) в случае, если вес плитки меньше 16, иначе - 0xf9f6f2.
-//6. Метод getTileColor, возвращающий цвет плитки в зависимости от ее веса в соответствии с нижеприведенными значениями:
+    Tile(int num) {
+        value = num;
+    }
 
-    //
-//для любых других значений: (0xff0000).
-//
-//Вышеперечисленные методы не должны быть приватными.
     public boolean isEmpty() {
-        if (this.value == 0) return true;
-        else return false;
+        return value == 0;
     }
 
-    public Color getFontColor() {
-        if (this.value < 16) {
-            return new Color(0x776e65);
-        } else return new Color(0xf9f6f2);
+    Color getFontColor() {
+        return value < 16 ? new Color(0x776e65) : new Color(0xf9f6f2);
     }
 
-    public Color getTileColor() {
+    Color getTileColor() {
         switch (value) {
             case 0:
                 return new Color(0xcdc1b4);
@@ -54,13 +46,9 @@ public class Tile {
                 return new Color(0xedc53f);
             case 2048:
                 return new Color(0xedc22e);
+
             default:
                 return new Color(0xff0000);
         }
-
-    }
-
-    public Tile() {
-        this.value = 0;
     }
 }
